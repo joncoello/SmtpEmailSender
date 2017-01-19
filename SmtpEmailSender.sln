@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpEmailSender.ConsoleTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpEmailSender.Api", "SmtpEmailSender.Api\SmtpEmailSender.Api.csproj", "{9EACC740-6EB2-4F66-9E00-CEE78C5A58F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmtpEmailSender.ApiTests", "SmtpEmailSender.ApiTests\SmtpEmailSender.ApiTests.csproj", "{8A18D823-93C0-4974-80BE-65BA68153E5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9EACC740-6EB2-4F66-9E00-CEE78C5A58F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EACC740-6EB2-4F66-9E00-CEE78C5A58F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EACC740-6EB2-4F66-9E00-CEE78C5A58F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A18D823-93C0-4974-80BE-65BA68153E5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A18D823-93C0-4974-80BE-65BA68153E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A18D823-93C0-4974-80BE-65BA68153E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A18D823-93C0-4974-80BE-65BA68153E5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
