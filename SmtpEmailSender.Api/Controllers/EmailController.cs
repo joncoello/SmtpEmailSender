@@ -1,5 +1,7 @@
-﻿using System;
+﻿using SmtpEmailSender.DomainModel.Providers;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,7 +16,21 @@ namespace SmtpEmailSender.Api.Controllers
 
         [Route("")]
         public async Task<IHttpActionResult> Post() {
-            return Ok();
+
+            try
+            {
+                var password = ConfigurationManager.ConnectionStrings["SmtpPassword"].ConnectionString;
+                var smtpClient = new SmtpEmailProvider();
+                smtpClient.Send(password);
+                
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                // logging
+                return InternalServerError(ex);
+            }
+            
         }
 
     }
