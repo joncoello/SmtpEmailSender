@@ -12,9 +12,16 @@ namespace SmtpEmailSender.ApiTests
 {
     public class HttpServerAndClient<T> : IDisposable
     {
-        public readonly HttpClient Client;
-        public readonly IDisposable Server;
-        
+        private HttpClient _client;
+        public HttpClient Client {
+            get { return _client; } 
+        }
+
+        private IDisposable _server;
+        public IDisposable Server {
+            get { return _server; }
+        }
+
         public HttpServerAndClient()
         {
             var l = new TcpListener(IPAddress.Loopback, 0);
@@ -24,50 +31,54 @@ namespace SmtpEmailSender.ApiTests
 
             string address = "http://localhost:" + port.ToString();
 
-            Server = WebApp.Start<T>(address);
+            _server = WebApp.Start<T>(address);
 
-            Client = new HttpClient();
-            Client.BaseAddress = new Uri(address);
+            _client = new HttpClient();
+            _client.BaseAddress = new Uri(address);
 
         }
 
-        public void Dispose() { }
+        #region IDisposable
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-        //#region IDisposable
-        //public void Dispose()
+        //// NOTE: Leave out the finalizer altogether if this class doesn't   
+        //// own unmanaged resources itself, but leave the other methods  
+        //// exactly as they are.   
+        //~HttpServerAndClient()
         //{
-        //    Dispose(true);
-        //    GC.SuppressFinalize(this);
+        //    // Finalizer calls Dispose(false)  
+        //    Dispose(false);
         //}
 
-        ////// NOTE: Leave out the finalizer altogether if this class doesn't   
-        ////// own unmanaged resources itself, but leave the other methods  
-        ////// exactly as they are.   
-        ////~HttpServerAndClient()
-        ////{
-        ////    // Finalizer calls Dispose(false)  
-        ////    Dispose(false);
-        ////}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                // free managed resources  
+                if (_client != null)
+                {
+                    _client.Dispose();
+                    _client = null;
+                }
 
-        //protected virtual void Dispose(bool disposing)
-        //{
-        //    //if (disposing)
-        //    //{
-        //    //    // free managed resources  
-        //    //    if (managedResource != null)
-        //    //    {
-        //    //        managedResource.Dispose();
-        //    //        managedResource = null;
-        //    //    }
-        //    //}
-        //    //// free native resources if there are any.  
-        //    //if (nativeResource != IntPtr.Zero)
-        //    //{
-        //    //    Marshal.FreeHGlobal(nativeResource);
-        //    //    nativeResource = IntPtr.Zero;
-        //    //}
-        //}
-        //#endregion
+                if (_server != null)
+                {
+                    _server.Dispose();
+                    _server = null;
+                }
+            }
+            //// free native resources if there are any.  
+            //if (nativeResource != IntPtr.Zero)
+            //{
+            //    Marshal.FreeHGlobal(nativeResource);
+            //    nativeResource = IntPtr.Zero;
+            //}
+        }
+        #endregion
 
     }
 

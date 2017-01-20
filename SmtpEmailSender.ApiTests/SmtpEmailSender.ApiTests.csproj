@@ -99,6 +99,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="EmailTests.cs" />
     <Compile Include="HelloWorldTests.cs" />
     <Compile Include="HttpServerAndClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
