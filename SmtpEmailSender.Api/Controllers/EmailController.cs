@@ -21,7 +21,7 @@ namespace SmtpEmailSender.Api.Controllers
             {
                 var password = ConfigurationManager.ConnectionStrings["SmtpPassword"].ConnectionString;
                 var smtpClient = new SmtpEmailProvider();
-                smtpClient.Send(password);
+                await smtpClient.Send(password);
                 
                 return Ok();
             }

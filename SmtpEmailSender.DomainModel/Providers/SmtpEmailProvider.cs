@@ -11,7 +11,7 @@ namespace SmtpEmailSender.DomainModel.Providers
     public class SmtpEmailProvider
     {
 
-        public void Send(string password) {
+        public async Task Send(string password) {
 
             var client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
@@ -37,7 +37,7 @@ namespace SmtpEmailSender.DomainModel.Providers
                 message.Body = "This is a test message";
 
                 // Send the message
-                client.Send(message);
+                await client.SendMailAsync(message);
 
                 // Clean up
                 message = null;
